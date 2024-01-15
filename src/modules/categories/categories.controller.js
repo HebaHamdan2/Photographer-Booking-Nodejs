@@ -3,6 +3,7 @@ import categoryModel from "../../../DB/model/category.model.js";
 import cloudinary from "../../services/cloudinary.js";
 import { pagination } from "../../services/pagination.js";
 import subcategoryModel from "../../../DB/model/subcategory.model.js";
+import productModel from "../../../DB/model/product.model.js";
 
 export  const getCategories=async(req,res,next)=>{
     const {skip,limit}=pagination(req.query.page,req.query.limit);
@@ -63,7 +64,7 @@ export const deleteCategory=async(req,res,next)=>{
 if(!category){
   return next(new Error(`category not found`,{cause:404}))
 }
-//await productModel.deleteMany({ categoryId });
+await productModel.deleteMany({ categoryId });
 await subcategoryModel.deleteMany({ categoryId });
 return res.status(200).json({message:"success"});
 

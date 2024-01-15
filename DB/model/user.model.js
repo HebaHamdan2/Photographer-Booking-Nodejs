@@ -15,9 +15,7 @@ const userSchema=new Schema({
         type:String,
         required:true,
     },
-    image:{
-        type:Object,
-    },
+
     phone:{
         type:String,
     },
@@ -35,6 +33,13 @@ const userSchema=new Schema({
         default:"Active",
         enum:["Active","Inactive"],
 
+    },
+    profilePic:{
+        type:Object,
+        default:null
+    },
+    coverPic:{
+     type:Object
     },
     role:{
         type:String,

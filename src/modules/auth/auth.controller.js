@@ -27,7 +27,7 @@ const createUser=await userModel.create({
     userName,
     email,
     password:hashPassword,
-   image:{secure_url,public_id},
+   profilePic:{secure_url,public_id},
 });
 return res.status(201).json({message:"success",createUser});
 }
@@ -56,7 +56,8 @@ if (!user) {
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return res.status(200).json({ message: "success", user });
+    // return res.status(200).json({ message: "success", user });
+  return next(new Error(`mismatch password`,{cause:401}));
   }
   const token = jwt.sign(
     { id: user._id, role: user.role, status: user.status },
