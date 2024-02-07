@@ -6,7 +6,11 @@ import userModel from "../../../DB/model/user.model.js";
 export const createBooking=async(req,res,next)=>{
     const cart = await cartModel.findOne({ userId: req.user._id });
     let startTimea = req.body.startTime.split(":").map(Number);
+
+
     const bookDate=new Date(req.body.bookDate);
+
+    
     if(! req.body.endTime || ! req.body.startTime){
       return next(new Error(`Booking times required`,{cause:404}))
     }
